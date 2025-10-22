@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Harl.hpp"
+#include "../include/Harl.hpp"
 
 void Harl::complain(std::string level) {
     std::string levels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};

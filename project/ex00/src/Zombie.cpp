@@ -1,6 +1,6 @@
-#include <iostream> // provides cout, endl
+#include <iostream>
 
-#include "Zombie.hpp"
+#include "../include/Zombie.hpp"
 
 Zombie::Zombie(std::string name) : m_name(name) {
     std::cout << "Wild " << m_name << " appeared!" << std::endl;

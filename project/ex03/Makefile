@@ -1,24 +1,30 @@
+NAME = cpp01_ex03
+
 CXX = c++
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98
+CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-EXEC = cpp01_ex03
+SRC_DIR = src
+OBJ_DIR = obj
 
-SRCS = HumanA.cpp HumanB.cpp Weapon.cpp main.cpp
-OBJS = $(SRCS:.cpp=.o)
+SRCS = $(wildcard $(SRC_DIR)/*.cpp)
+OBJS = $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
 
-all: $(EXEC)
+all: $(NAME)
 
-$(EXEC): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+$(OBJ_DIR):
+	mkdir $(OBJ_DIR)
 
-%.o: %.cpp
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
+$(NAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $^
+
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	rm -f $(EXEC)
+	rm -f $(NAME)
 
 re: fclean all
 

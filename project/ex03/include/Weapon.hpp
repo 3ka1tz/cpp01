@@ -11,7 +11,7 @@ public:
     void setType(const std::string& type);
 
 private:
-    std::string type_;
+    std::string m_type;
 };
 
 #endif

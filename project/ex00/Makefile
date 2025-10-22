@@ -1,36 +1,27 @@
-# Program name
-NAME = cpp01-ex00
+NAME = cpp01_ex00
 
-# Compiler
 CXX = c++
+CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-# Compiler flags
-#  Wall: enable common warnings
-#  Wextra: enable extra warnings
-#  Werror: treat warnings as errors
-#  std=c++98: compile using the C++98 standard
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+SRC_DIR = src
+OBJ_DIR = obj
 
-# Source files
-SRCS = main.cpp			\
-       newZombie.cpp	\
-	   randomChump.cpp	\
-	   Zombie.cpp
+SRCS = $(wildcard $(SRC_DIR)/*.cpp)
+OBJS = $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
 
-# Object files
-OBJS = $(SRCS:.cpp=.o)
-
-# Default rule
 all: $(NAME)
+
+$(OBJ_DIR):
+	mkdir $(OBJ_DIR)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)
