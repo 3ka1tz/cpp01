@@ -10,10 +10,10 @@ Zombie::~Zombie() {
     std::cout << "Wild " << m_name << " fainted!" << std::endl;
 }
 
-void Zombie::setName(std::string name) {
+void Zombie::setName(const std::string& name) {
     m_name = name;
 }
 
-void Zombie::announce() {
+void Zombie::announce() const {
     std::cout << m_name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }

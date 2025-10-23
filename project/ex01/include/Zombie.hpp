@@ -8,13 +8,13 @@ public:
     Zombie();
     ~Zombie();
 
-    void setName(std::string name);
-    void announce();
+    void setName(const std::string& name);
+    void announce() const;
 
 private:
     std::string m_name;
 };
 
-Zombie* zombieHorde(int n, std::string name);
+Zombie* zombieHorde(int n, const std::string& name);
 
 #endif

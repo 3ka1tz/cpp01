@@ -5,13 +5,14 @@
 
 class Harl {
 public:
-    void complain(std::string level);
+    int getLevel(std::string level) const;
+    void complain(std::string level) const;
 
 private:
-    void debug();
-    void info();
-    void warning();
-    void error();
+    void debug() const;
+    void info() const;
+    void warning() const;
+    void error() const;
 };
 
 #endif
