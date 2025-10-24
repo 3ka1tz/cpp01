@@ -2,22 +2,25 @@
 
 #include "../include/Harl.hpp"
 
-int Harl::getLevel(std::string level) const {
+int Harl::getLevel(const std::string& level) const {
     const std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
-    int levelIndex = 4;
-
-}
-
-void Harl::complain(std::string level) const {
-    std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
-
-    void (Harl::*functions[])() = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
 
     for (int i = 0; i < 4; ++i) {
-        if (levels[i] == level) {
-            (this->*functions[i])();
-            return;
-        }
+        if (level == levels[i])
+            return i;
+    }
+
+    return -1;
+}
+
+void Harl::complain(const std::string& level) const {
+    const MemberFuncPtr complains[4] = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+    const int levelIndex = getLevel(level);
+
+    if (levelIndex == -1) {
+        std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+    } else {
+        (this->*(complains[levelIndex]))();
     }
 }
 
